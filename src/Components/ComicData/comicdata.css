@@ -35,7 +35,7 @@
 .comic-description {
   font-size: 16px;
   display: flex;
-  align-items: center; /* Align the text vertically in the middle */
+  align-items: center;
 }
 
 .comic-info-container {

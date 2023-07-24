@@ -52,33 +52,3 @@ const ComicData = ({ comicData }) => {
 };
 
 export default ComicData;
-
-// const ComicData = ({ comicData }) => {
-//   if (!comicData) {
-//     return null;
-//   }
-
-//   const { title, thumbnail, description, dates } = comicData;
-
-//   return (
-//     <div className="comic-data">
-//       <img
-//         src={`${thumbnail.path}.${thumbnail.extension}`}
-//         alt={title}
-//         className="comic-image"
-//       />
-//       <h2>{title}</h2>
-//       {description && <p>{description}</p>}
-//       <div className="comic-dates">
-//         {dates.map((date) => (
-//           <div key={date.type}>
-//             <p>{date.type}</p>
-//             <p>{new Date(date.date).toDateString()}</p>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ComicData;
