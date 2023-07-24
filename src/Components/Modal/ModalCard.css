@@ -1,0 +1,96 @@
+.modal {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  color: #000;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.comic-list {
+  /* display: grid;
+  margin-top: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px; */
+  margin: 0;
+  padding: 0;
+}
+
+.comic-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.comic-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.comic-image {
+  width: 100px;
+  height: 150px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.comic-description {
+  /* Limit the height of the description and add ellipsis for overflow */
+  overflow: hidden;
+  /* Add margin to separate the description from the title */
+  margin-top: 5px;
+}
+
+.comic-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.comic-item img {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.comic-item h3 {
+  margin-bottom: 5px;
+  color: #000;
+}
+
+.comic-item p {
+  margin-bottom: 10px;
+  color: #000;
+}
