@@ -1,22 +1,23 @@
 img {
-  width: 14rem;
-  height: 14rem;
+  width: 19rem;
+  height: 20rem;
+  border-radius: 0.3rem;
 }
 
 .card {
-  height: 100%;
-  padding: 1rem;
-  width: 100%;
-  border-radius: 0.3rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  height: 100%;
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
 
 .card-name {
   width: 100%;
   text-align: center;
-  font-size: 1em;
+  font-size: 1.2em;
   margin: 0;
   padding: 0;
   color: white;

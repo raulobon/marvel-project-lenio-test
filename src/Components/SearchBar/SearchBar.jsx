@@ -5,9 +5,9 @@ import marvelogo from "../../assets/Marvel_Logo.svg";
 
 const SearchBar = ({
   onSearch,
-  onShowFavorites,
   setPastedComicData,
   pastedComicData,
+  onShowFavorites,
 }) => {
   const [searchText, setSearchText] = useState("");
 
@@ -81,6 +81,7 @@ const SearchBar = ({
         />
       </form>
       <div className="favorites-icon">
+        {/* Use the handleShowFavorites prop directly */}
         <FaStar onClick={onShowFavorites} />
       </div>
     </div>

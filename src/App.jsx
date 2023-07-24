@@ -7,17 +7,41 @@ import ComicData from "./Components/ComicData/ComicData";
 const App = () => {
   const [hero, setHero] = useState([]);
   const [pastedComicData, setPastedComicData] = useState(null);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     fetchHeroes();
+    loadFavorites();
   }, []);
+
+  const handleShowFavorites = () => {
+    // If the search input is empty, show all heroes; otherwise, show favorites
+    if (favorites.length === 0) {
+      fetchHeroes();
+    } else {
+      setHero(favorites);
+    }
+  };
+
+  const handleFavoriteToggle = (hero) => {
+    if (favorites.find((favHero) => favHero.id === hero.id)) {
+      // Remove the hero from favorites if it's already there
+      const updatedFavorites = favorites.filter(
+        (favHero) => favHero.id !== hero.id
+      );
+      setFavorites(updatedFavorites);
+    } else {
+      // Add the hero to favorites
+      setFavorites([...favorites, hero]);
+    }
+  };
 
   const fetchHeroes = async () => {
     try {
       const response = await fetch(
         `https://gateway.marvel.com/v1/public/characters?orderBy=modified&apikey=${
           import.meta.env.VITE_MARVEL_APIKEY
-        }&limit=8&offset=${getRandomInt(0, 1562)}}`
+        }&limit=8&offset=${getRandomInt(0, 1562)}`
       );
       const data = await response.json();
       setHero(data.data.results);
@@ -44,14 +68,27 @@ const App = () => {
     }
   };
 
+  const loadFavorites = () => {
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites"));
+    if (savedFavorites) {
+      setFavorites(savedFavorites);
+    }
+  };
+
   return (
     <div className="page-container">
       <SearchBar
         onSearch={handleSearch}
         setPastedComicData={setPastedComicData}
+        onShowFavorites={handleShowFavorites} // Pass the handleShowFavorites function to SearchBar
+        favorites={favorites}
       />
       <ComicData comicData={pastedComicData} />
-      <HeroCards heroes={hero} />
+      <HeroCards
+        heroes={hero}
+        favorites={favorites}
+        handleFavoriteToggle={handleFavoriteToggle} // Pass the handleFavoriteToggle function to HeroCards
+      />
     </div>
   );
 };
