@@ -5,11 +5,12 @@ import marvelogo from "../../assets/Marvel_Logo.svg";
 
 const SearchBar = ({
   onSearch,
-  setPastedComicData,
   pastedComicData,
-  onShowFavorites,
+  setPastedComicData,
+  favorites,
 }) => {
   const [searchText, setSearchText] = useState("");
+  const [showFavorites, setShowFavorites] = useState(false);
 
   const handleInputChange = (e) => {
     setSearchText(e.target.value);
@@ -81,9 +82,23 @@ const SearchBar = ({
         />
       </form>
       <div className="favorites-icon">
-        {/* Use the handleShowFavorites prop directly */}
-        <FaStar onClick={onShowFavorites} />
+        <button onClick={() => setShowFavorites(!showFavorites)}>
+          <FaStar />
+        </button>
       </div>
+      {showFavorites && favorites.length > 0 && (
+        <div className="favorites">
+          {favorites.map((favorite) => (
+            <div key={favorite.id}>
+              <img
+                src={`${favorite.thumbnail.path}.${favorite.thumbnail.extension}`}
+                alt={favorite.name}
+              />
+              <h3 className="card-name">{favorite.name}</h3>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

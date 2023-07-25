@@ -67,9 +67,7 @@
 }
 
 .comic-description {
-  /* Limit the height of the description and add ellipsis for overflow */
   overflow: hidden;
-  /* Add margin to separate the description from the title */
   margin-top: 5px;
 }
 

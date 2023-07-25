@@ -8,6 +8,7 @@ const App = () => {
   const [hero, setHero] = useState([]);
   const [pastedComicData, setPastedComicData] = useState(null);
   const [favorites, setFavorites] = useState([]);
+  const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
     fetchHeroes();
@@ -15,23 +16,17 @@ const App = () => {
   }, []);
 
   const handleShowFavorites = () => {
-    // If the search input is empty, show all heroes; otherwise, show favorites
-    if (favorites.length === 0) {
-      fetchHeroes();
-    } else {
-      setHero(favorites);
-    }
+    setShowFavorites((prevShowFavorites) => !prevShowFavorites);
+    setHero([]);
   };
 
   const handleFavoriteToggle = (hero) => {
     if (favorites.find((favHero) => favHero.id === hero.id)) {
-      // Remove the hero from favorites if it's already there
       const updatedFavorites = favorites.filter(
         (favHero) => favHero.id !== hero.id
       );
       setFavorites(updatedFavorites);
     } else {
-      // Add the hero to favorites
       setFavorites([...favorites, hero]);
     }
   };
@@ -80,15 +75,23 @@ const App = () => {
       <SearchBar
         onSearch={handleSearch}
         setPastedComicData={setPastedComicData}
-        onShowFavorites={handleShowFavorites} // Pass the handleShowFavorites function to SearchBar
+        handleShowFavorites={handleShowFavorites}
         favorites={favorites}
       />
       <ComicData comicData={pastedComicData} />
-      <HeroCards
-        heroes={hero}
-        favorites={favorites}
-        handleFavoriteToggle={handleFavoriteToggle} // Pass the handleFavoriteToggle function to HeroCards
-      />
+      {showFavorites && favorites.length > 0 ? (
+        <HeroCards
+          heroes={favorites}
+          favorites={favorites}
+          handleFavoriteToggle={handleFavoriteToggle}
+        />
+      ) : (
+        <HeroCards
+          heroes={hero}
+          favorites={favorites}
+          handleFavoriteToggle={handleFavoriteToggle}
+        />
+      )}
     </div>
   );
 };
