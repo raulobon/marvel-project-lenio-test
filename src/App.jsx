@@ -3,6 +3,7 @@ import SearchBar from "./Components/SearchBar/SearchBar";
 import HeroCards from "./Components/HeroCards/HeroCards";
 import { getRandomInt } from "./utils/getRandomInt";
 import ComicData from "./Components/ComicData/ComicData";
+import debounce from "./utils/debounce";
 
 const App = () => {
   const [hero, setHero] = useState([]);
@@ -45,7 +46,8 @@ const App = () => {
     }
   };
 
-  const handleSearch = async (searchTerm) => {
+  //debounce implementation
+  const handleSearch = debounce(async (searchTerm) => {
     if (searchTerm) {
       try {
         const response = await fetch(
@@ -61,8 +63,7 @@ const App = () => {
     } else {
       fetchHeroes();
     }
-  };
-
+  }, 5000);
   const loadFavorites = () => {
     const savedFavorites = JSON.parse(localStorage.getItem("favorites"));
     if (savedFavorites) {
